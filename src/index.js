@@ -90,7 +90,9 @@ const store = createStore(reducer);
 store.subscribe(() => console.log(store.getState()));
 
 export const recursivePickNumber = (max, array) => {
-
+    if(array.length == 0) {
+        return 'Game Over'
+    }
     const number = Math.floor(Math.random() * max); //(max - min + 1) + min;
     if (array.indexOf(number) > -1) {
         array.splice(array.indexOf(number), 1);
