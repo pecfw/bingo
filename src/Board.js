@@ -1,3 +1,5 @@
+import React from 'react';
+import { recursivePickNumber } from './index';
 ///////////////////////
 /////   Board    //////
 ///////////////////////
@@ -18,42 +20,44 @@ const setBoard = (board) => {
 }
 
 const column = (y, lowestNumber, highestNumber, board) => {
-  let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-  for (var i = lowestNumber; i < highestNumber; i++) {
-    let number = recursivePickNumber(19, arrayNumbers)
-    board[y][number] = i;
-  }
-  return board
+    let arrayNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+    for (var i = lowestNumber; i < highestNumber; i++) {
+        let number = recursivePickNumber(19, arrayNumbers)
+        board[y][number] = i;
+    }
+    return board
 }
 
-const row = (board) => {
-  for (let i = 1; i < 19; i++) {
-    return <tr>{board[1][i]+" "+
-    board[2][i] + " " +
-    board[3][i] + " " +
-    board[4][i] + " " +
-    board[5][i] + " " +
-    board[6][i] + " " +
-    board[7][i] + " " +
-    board[8][i] + " " +
-    board[9][i]
-  }</tr>
-  }
-}
+// const row = (board) => {
+//     for (let i = 1; i < 19; i++) {
+//         return <tr>{board[1][i] + " " +
+//             board[2][i] + " " +
+//             board[3][i] + " " +
+//             board[4][i] + " " +
+//             board[5][i] + " " +
+//             board[6][i] + " " +
+//             board[7][i] + " " +
+//             board[8][i] + " " +
+//             board[9][i]
+//         }</tr>
+//     }
+// }
 
 const PrintBoard = (props) => {
     return (<div>
         <button onClick={(board) => {
-                var board = setBoard(props.board);
-                props.createBoard(board);
-                row(props.board);
-            }}>
+            board = setBoard(props.board);
+            props.createBoard(board);
+            // row(props.board);
+        }}>
             New Board
         </button>
         <table>
             <tbody>
-                {row(props.board)}
+                {/* {row(props.board)} */}
             </tbody>
         </table>
     </div >)
 }
+
+export default PrintBoard

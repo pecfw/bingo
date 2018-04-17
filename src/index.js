@@ -1,6 +1,10 @@
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { createStore } from 'redux';
+import { render } from 'react-dom';
+import React from 'react';
+import { Provider } from 'react-redux';
 
 registerServiceWorker();
 
@@ -82,11 +86,10 @@ const reducer = (state = initialState, action) => {
             return state
     }
 }
-
 const store = createStore(reducer);
 store.subscribe(() => console.log(store.getState()));
 
-const recursivePickNumber = (max, array) => {
+export const recursivePickNumber = (max, array) => {
 
     const number = Math.floor(Math.random() * max); //(max - min + 1) + min;
     if (array.indexOf(number) > -1) {
@@ -96,3 +99,7 @@ const recursivePickNumber = (max, array) => {
         return recursivePickNumber(max, array)
     }
 }
+
+render(<Provider store={store}>
+    <App></App>
+</Provider>, document.getElementById('app'))
