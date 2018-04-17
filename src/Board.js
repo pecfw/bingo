@@ -4,24 +4,62 @@ import { recursivePickNumber } from './index';
 /////   Board    //////
 ///////////////////////
 
-const setBoard = (board) => {
+const setColumn = (y, lowestNumber, highestNumber, board, items) => {
+    for (var x = 1; x < 6; x++) {
+        let item = recursivePickNumber(highestNumber, items, lowestNumber)
+        board[y][x] = item;
+    }
     return board
 }
 
+const setBoard = (board, boardItems) => {
+    const items = [...boardItems]
+    const numberOfItems = boardItems.length
+    const numberOfItemsPerColumn = numberOfItems / 5
+    for (let y = 1; y < 6; y++) {
+        setColumn(y, ((y - 1) * numberOfItemsPerColumn), y * numberOfItemsPerColumn, board, items)
+    }
+    board[3][3] = '*'
+    return board
+}
+
+class PrintBoard extends Component {
+    render() {
+        let row = []
+        for (let x = 1; x < 6; x++) {
+            row.push(
+                <tr>{
+                    this.props.board[1][x] + " " +
+                    this.props.board[2][x] + " " +
+                    this.props.board[3][x] + " " +
+                    this.props.board[4][x] + " " +
+                    this.props.board[5][x]
+                }</tr>
+            )
+        }
+        return row
+    }
+}
+
 class Board extends Component {
+    constructor() {
+        super()
+        this.state = { showResults: false }
+    }
+
     render() {
         return (
             <div>
                 <button onClick={(board) => {
-                    board = setBoard(this.props.board);
+                    board = setBoard(this.props.board, this.props.boardItems);
                     this.props.createBoard(board);
-                    // row(props.board);
+                    this.setState({ showResults: true });
                 }}>
                     New Board
                 </button>
                 <table>
                     <tbody>
-                        {/* {row(props.board)} */}
+                        {this.state.showResults ? <PrintBoard board={this.props.board} /> : null}
                     </tbody>
                 </table>
             </div >
