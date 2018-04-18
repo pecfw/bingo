@@ -23,12 +23,24 @@
   font-size: large;
 }
 
+.App-body {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Board-table {
+  display: flex;
+  justify-content: center;
+}
+
 table {
   border-collapse: collapse;
   margin: 20px;
 }
 
-table, th, td {
+th, td {
   border: 1px solid black;
 }
 

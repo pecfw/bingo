@@ -58,11 +58,13 @@ class Board extends Component {
                     New Board
                 </button>
                 {this.state.showResults ?
-                    <table>
-                        <tbody>
-                            <PrintBoard board={this.props.board} />
-                        </tbody>
-                    </table>
+                    <div className="Board-table">
+                        <table>
+                            <tbody>
+                                <PrintBoard board={this.props.board} />
+                            </tbody>
+                        </table>
+                    </div>
                     : null}
             </div >
         )

@@ -34,9 +34,11 @@ class App extends Component {
           <h1 className="App-title">Friday Fun at 4:44 Bingo Time</h1>
         </header>
         {/* Hide create board when current number clicked */}
-        <Board createBoard={this.props.createBoard} board={this.props.board} boardItems={this.props.boardItems} />
-        <CurrentNumber pickNumber={this.props.pickNumber} boardItems={this.props.boardItems} currentNumber={this.props.currentNumber} />
-        <RestartGame />
+        <body className="App-body">
+          <Board createBoard={this.props.createBoard} board={this.props.board} boardItems={this.props.boardItems} />
+          <CurrentNumber pickNumber={this.props.pickNumber} boardItems={this.props.boardItems} currentNumber={this.props.currentNumber} />
+          {/* <RestartGame /> */}
+        </body>
       </div>
     )
   }
