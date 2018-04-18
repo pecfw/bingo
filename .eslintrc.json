@@ -1,0 +1,35 @@
+{
+    "extends": [
+        "airbnb",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "rules": {
+        "semi": [
+            "error",
+            "always"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 80
+            }
+        ]
+    }
+}
