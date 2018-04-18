@@ -50,7 +50,7 @@ class Board extends Component {
     render() {
         return (
             <div>
-                <button onClick={(board) => {
+                <button className="Board-button" onClick={(board) => {
                     board = setBoard(this.props.board, this.props.boardItems);
                     this.props.createBoard(board);
                     this.setState({ showResults: true });

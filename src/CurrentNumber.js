@@ -13,7 +13,7 @@ class CurrentNumber extends Component {
         return (
             <div>
                 <p>{this.props.currentNumber}</p>
-                <button onClick={(event) => {
+                <button className="CurrentNumber-button" onClick={(event) => {
                     event.preventDefault();
                     let number = setNumber(this.props.boardItems);
                     this.props.pickNumber(number);

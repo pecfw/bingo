@@ -30,9 +30,17 @@
   justify-content: center;
 }
 
+.Board-button {
+  margin: 20px;
+}
+
 .Board-table {
   display: flex;
   justify-content: center;
+}
+
+.CurrentNumber-button {
+  margin: 20px;
 }
 
 table {
