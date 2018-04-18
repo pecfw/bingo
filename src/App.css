@@ -23,6 +23,20 @@
   font-size: large;
 }
 
+table {
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  height: 30px;
+  width: 30px; 
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
