@@ -28,13 +28,13 @@ class PrintBoard extends Component {
         let row = []
         for (let x = 1; x < 6; x++) {
             row.push(
-                <tr>{
-                    this.props.board[1][x] + " " +
-                    this.props.board[2][x] + " " +
-                    this.props.board[3][x] + " " +
-                    this.props.board[4][x] + " " +
-                    this.props.board[5][x]
-                }</tr>
+                <tr key={x}>
+                    <td>{this.props.board[1][x]}</td>
+                    <td>{this.props.board[2][x]}</td>
+                    <td>{this.props.board[3][x]}</td>
+                    <td>{this.props.board[4][x]}</td>
+                    <td>{this.props.board[5][x]}</td>
+                </tr>
             )
         }
         return row
@@ -57,11 +57,13 @@ class Board extends Component {
                 }}>
                     New Board
                 </button>
-                <table>
-                    <tbody>
-                        {this.state.showResults ? <PrintBoard board={this.props.board} /> : null}
-                    </tbody>
-                </table>
+                {this.state.showResults ?
+                    <table>
+                        <tbody>
+                            <PrintBoard board={this.props.board} />
+                        </tbody>
+                    </table>
+                    : null}
             </div >
         )
     }

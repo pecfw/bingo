@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import CurrentNumber from './CurrentNumber';
 import Board from './Board';
 import RestartGame from './Restart';
+import styled from 'styled-components'
+
+// const Board = styled.div`
+//   margin: 20px;
+// `
 
 const mapStateToProps = (state) => {
   return { boardItems: state.boardItems, currentNumber: state.currentNumber, board: state.board }
