@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './App.css';
 import CurrentNumber from './CurrentNumber';
 import Board from './Board';
@@ -47,5 +48,17 @@ class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  currentNumber: null
+};
+
+App.propTypes = {
+  createBoard: PropTypes.func.isRequired,
+  board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  pickNumber: PropTypes.func.isRequired,
+  currentNumber: PropTypes.func
+};
 
 export default connect(mapStateToProps, mapDispachToProps)(App);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { recursivePickNumber } from './index';
 
 const setColumn = (y, lowestNumber, highestNumber, board, items) => {
@@ -76,5 +77,11 @@ class Board extends Component {
     );
   }
 }
+
+Board.propTypes = {
+  createBoard: PropTypes.func.isRequired,
+  board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired
+};
 
 export default Board;
