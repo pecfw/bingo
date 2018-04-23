@@ -17,7 +17,7 @@ const setBoard = (board, boardItems) => {
   for (let y = 1; y < 6; y++) {
     setColumn(
       y,
-      ((y - 1) * numberOfItemsPerColumn),
+      (y - 1) * numberOfItemsPerColumn,
       y * numberOfItemsPerColumn,
       board,
       items
@@ -57,23 +57,24 @@ class Board extends Component {
       <div>
         <button
           className="Board-button"
-          onClick={(board) => {
+          onClick={board => {
             board = setBoard(this.props.board, this.props.boardItems);
             this.props.createBoard(board);
             this.setState({ showResults: true });
           }}
         >
-        New Board
+          New Board
         </button>
-        {this.state.showResults ?
+        {this.state.showResults ? (
           <div className="Board-table">
             <table>
               <tbody>
                 <PrintBoard board={this.props.board} />
               </tbody>
             </table>
-          </div> : null}
-      </div >
+          </div>
+        ) : null}
+      </div>
     );
   }
 }
@@ -81,7 +82,7 @@ class Board extends Component {
 Board.propTypes = {
   createBoard: PropTypes.func.isRequired,
   board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired
+  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Board;

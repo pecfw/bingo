@@ -5,25 +5,24 @@ import './App.css';
 import CurrentNumber from './CurrentNumber';
 import Board from './Board';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     boardItems: state.boardItems,
     currentNumber: state.currentNumber,
-    board: state.board
+    board: state.board,
   };
 };
 
 const mapDispachToProps = dispatch => {
   return {
     pickNumber(number) {
-      dispatch({ type: "NEXT_NUMBER", value: number });
+      dispatch({ type: 'NEXT_NUMBER', value: number });
     },
     createBoard(board) {
-      dispatch({ type: "ADD_BOARD", value: board });
-    }
+      dispatch({ type: 'ADD_BOARD', value: board });
+    },
   };
 };
-
 
 class App extends Component {
   render() {
@@ -31,7 +30,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Friday Fun at 4:44 Bingo Time</h1>
-        </header>{/* Hide create board when current number clicked */}
+        </header>
+        {/* Hide create board when current number clicked */}
         <div className="App-body">
           <Board
             createBoard={this.props.createBoard}
@@ -50,7 +50,7 @@ class App extends Component {
 }
 
 App.defaultProps = {
-  currentNumber: null
+  currentNumber: null,
 };
 
 App.propTypes = {
@@ -58,7 +58,7 @@ App.propTypes = {
   board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   pickNumber: PropTypes.func.isRequired,
-  currentNumber: PropTypes.func
+  currentNumber: PropTypes.number,
 };
 
 export default connect(mapStateToProps, mapDispachToProps)(App);

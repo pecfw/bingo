@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { recursivePickNumber } from './index';
 
-const setNumber = (boardItems) => {
+const setNumber = boardItems => {
   return recursivePickNumber(91, boardItems);
 };
 
@@ -13,12 +13,12 @@ class CurrentNumber extends Component {
         <p>{this.props.currentNumber}</p>
         <button
           className="CurrentNumber-button"
-          onClick={(event) => {
+          onClick={event => {
             event.preventDefault();
             this.props.pickNumber(setNumber(this.props.boardItems));
           }}
         >
-        Next Number
+          Next Number
         </button>
       </div>
     );
@@ -26,13 +26,13 @@ class CurrentNumber extends Component {
 }
 
 CurrentNumber.defaultProps = {
-  currentNumber: null
+  currentNumber: null,
 };
 
 CurrentNumber.propTypes = {
   boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   pickNumber: PropTypes.func.isRequired,
-  currentNumber: PropTypes.number
+  currentNumber: PropTypes.number,
 };
 
 export default CurrentNumber;
