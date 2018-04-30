@@ -1,36 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { recursivePickNumber } from './index';
+import recursivePickNumber from './index';
 
 const setNumber = boardItems => {
-  return recursivePickNumber(91, boardItems);
+  let item = recursivePickNumber(51, boardItems);
+  return item[0].number + ' ' + item[0].name;
 };
 
-class CurrentNumber extends Component {
-  render() {
-    return (
-      <div>
-        <p>{this.props.currentNumber}</p>
-        <button
-          className="CurrentNumber-button"
-          onClick={event => {
-            event.preventDefault();
-            this.props.pickNumber(setNumber(this.props.boardItems));
-          }}
-        >
-          Next Number
-        </button>
-      </div>
-    );
-  }
-}
+const CurrentNumber = ({ boardItems, pickNumber, currentNumber }) => {
+  return (
+    <div>
+      <p>{currentNumber}</p>
+      <button
+        className="CurrentNumber-button"
+        onClick={event => {
+          event.preventDefault();
+          pickNumber(setNumber(boardItems));
+        }}
+      >
+        Next Number
+      </button>
+    </div>
+  );
+};
 
 CurrentNumber.defaultProps = {
   currentNumber: null,
 };
 
 CurrentNumber.propTypes = {
-  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ).isRequired,
   pickNumber: PropTypes.func.isRequired,
   currentNumber: PropTypes.number,
 };

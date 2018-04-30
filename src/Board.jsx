@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { recursivePickNumber } from './index';
+import recursivePickNumber from './index';
+
+const board = {
+  1: { 1: null, 2: null, 3: null, 4: null, 5: null },
+  2: { 1: null, 2: null, 3: null, 4: null, 5: null },
+  3: { 1: null, 2: null, 3: null, 4: null, 5: null },
+  4: { 1: null, 2: null, 3: null, 4: null, 5: null },
+  5: { 1: null, 2: null, 3: null, 4: null, 5: null },
+};
+
+// const boards = [board];
 
 const setColumn = (y, lowestNumber, highestNumber, board, items) => {
   for (var x = 1; x < 6; x++) {
     let item = recursivePickNumber(highestNumber, items, lowestNumber);
-    board[y][x] = item;
+    board[y][x] = item[0].number;
   }
   return board;
 };
@@ -27,23 +37,17 @@ const setBoard = (board, boardItems) => {
   return board;
 };
 
-class PrintBoard extends Component {
-  render() {
-    let row = [];
-    for (let x = 1; x < 6; x++) {
-      row.push(
-        <tr key={x}>
-          <td>{this.props.board[1][x]}</td>
-          <td>{this.props.board[2][x]}</td>
-          <td>{this.props.board[3][x]}</td>
-          <td>{this.props.board[4][x]}</td>
-          <td>{this.props.board[5][x]}</td>
-        </tr>
-      );
+const DisplayBoard = () => {
+  let row = [];
+  for (let x = 1; x < 6; x++) {
+    let element = [];
+    for (let y = 1; y < 6; y++) {
+      element.push(<td key={y}>{board[y][x]}</td>);
     }
-    return row;
+    row.push(<tr key={x}>{element}</tr>);
   }
-}
+  return row;
+};
 
 class Board extends Component {
   constructor() {
@@ -57,19 +61,21 @@ class Board extends Component {
       <div>
         <button
           className="Board-button"
-          onClick={board => {
-            board = setBoard(this.props.board, this.props.boardItems);
-            this.props.createBoard(board);
+          onClick={e => {
+            e.preventDefault();
+            this.props.createBoard(setBoard(board, this.props.boardItems));
             this.setState({ showResults: true });
+            //this.boards.push()// boards as a prop instead of board
           }}
         >
           New Board
         </button>
         {this.state.showResults ? (
+          //for loop
           <div className="Board-table">
             <table>
               <tbody>
-                <PrintBoard board={this.props.board} />
+                <DisplayBoard />
               </tbody>
             </table>
           </div>
@@ -81,8 +87,12 @@ class Board extends Component {
 
 Board.propTypes = {
   createBoard: PropTypes.func.isRequired,
-  board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default Board;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './App.css';
@@ -9,7 +9,6 @@ const mapStateToProps = state => {
   return {
     boardItems: state.boardItems,
     currentNumber: state.currentNumber,
-    board: state.board,
   };
 };
 
@@ -24,30 +23,27 @@ const mapDispachToProps = dispatch => {
   };
 };
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Friday Fun at 4:44 Bingo Time</h1>
-        </header>
-        {/* Hide create board when current number clicked */}
-        <div className="App-body">
-          <Board
-            createBoard={this.props.createBoard}
-            board={this.props.board}
-            boardItems={this.props.boardItems}
-          />
-          <CurrentNumber
-            pickNumber={this.props.pickNumber}
-            boardItems={this.props.boardItems}
-            currentNumber={this.props.currentNumber}
-          />
+const App = ({ createBoard, boardItems, pickNumber, currentNumber }) => {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1 className="App-title">Friday Fun at 4:44 Bingo Time</h1>
+      </header>
+      {/* Hide create board when current number clicked */}
+      <div className="App-body">
+        <div className="App-boards">
+          {/*map array of boards*/}
+          <Board createBoard={createBoard} boardItems={boardItems} />
         </div>
+        <CurrentNumber
+          pickNumber={pickNumber}
+          boardItems={boardItems}
+          currentNumber={currentNumber}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 App.defaultProps = {
   currentNumber: null,
@@ -55,8 +51,12 @@ App.defaultProps = {
 
 App.propTypes = {
   createBoard: PropTypes.func.isRequired,
-  board: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  boardItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ).isRequired,
   pickNumber: PropTypes.func.isRequired,
   currentNumber: PropTypes.number,
 };
